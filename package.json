@@ -1,0 +1,21 @@
+{
+  "name": "easy-dfp",
+  "version": "0.0.1",
+  "description": "DFP Client Library",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "dfp",
+    "doubleclick for publishers",
+    "google dfp"
+  ],
+  "author": "Justin Warkentin",
+  "license": "MIT",
+  "dependencies": {
+    "googleapis": "^18.0.0",
+    "lodash": "^4.17.4",
+    "moment-timezone": "^0.5.13",
+    "soap": "^0.19.0",
+    "traverse": "^0.6.6"
+  }
+}
