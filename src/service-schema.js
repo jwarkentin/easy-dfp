@@ -30,7 +30,7 @@ class ServiceSchema {
     wsdlProto.findChildSchemaObject = function(obj, childName) {
       let found = null
       traverse(obj).forEach(function(el) {
-        if (el.$name === childName) {
+        if (el && el.$name === childName) {
           found = el
           this.stop()
         }
