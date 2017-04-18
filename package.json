@@ -1,6 +1,6 @@
 {
   "name": "easy-dfp",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "DFP Client Library",
   "main": "index.js",
   "scripts": {},
