@@ -10,6 +10,7 @@ function DFPClient(options) {
     },
     logRequest: false,
     logResponse: false,
+    logXmlOnError: false,
     immutable: false
   }, options)
 

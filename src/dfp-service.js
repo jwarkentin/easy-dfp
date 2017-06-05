@@ -47,13 +47,20 @@ function DFPService(name, clientOptions, authClient) {
             }
 
             service[name](self.serviceSchema.mapCall(name, args), (err, result) => {
-              if (self.options.logRequest) {
+              let logRequest = self.options.logRequest
+              let logResponse = self.options.logResponse
+              if (err && self.options.logXmlOnError) {
+                logRequest = true
+                logResponse = true
+              }
+
+              if (logRequest) {
                 let msg = `XML of last request to ${self.serviceName}::${name}()`
                 let dashes = (new Array(msg.length + 1)).join('-')
                 console.log(`${msg}\n${dashes}\n${self.dfpSoapClient.lastRequest}\n`)
               }
 
-              if (self.options.logResponse) {
+              if (logResponse) {
                 let msg = `XML of last response from ${self.serviceName}::${name}()`
                 let dashes = (new Array(msg.length + 1)).join('-')
                 console.log(`${msg}\n${dashes}\n${self.dfpSoapClient.lastResponse}\n`)
