@@ -104,17 +104,12 @@ Object.assign(DFPService.prototype, {
   },
 
   _getAuthTokens() {
-    if (!this._fetchTokens) {
+    // The default ttl for the tokens appears to be an hour. To avoid problems caused by clock skew we'll just
+    // go ahead and refresh the tokens if we're within 5 minutes of the expiry time.
+    let ttl = this._authTokens ? this._authTokens.expiry_date - Date.now() : 0
+    if (!this._fetchTokens || ttl < 300000) {
       this._fetchTokens = new Promise((resolve, reject) => {
-        // The default ttl for the tokens appears to be and hour. To avoid problems caused by clock skew we'll just
-        // go ahead and refresh the tokens if we're within 5 minutes of the expiry time.
-        if (this._authTokens && this._authTokens.expiry_date - Date.now() > 300000) {
-          this._fetchTokens = null
-          return resolve(this._authTokens)
-        }
-
         this.dfpAuthClient.authorize((err, tokens) => {
-          this._fetchTokens = null
           if (err) {
             reject(err)
           } else {
